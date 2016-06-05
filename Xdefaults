@@ -1,0 +1,61 @@
+urxvt*font:				xft:Monospace:style=Regular:antialias=true
+urxvt*boldFont:			xft:Monospace:style=Bold:antialias=true
+urxvt*italicFont:		xft:Monospace:style=Italic:antialias=true
+urxvt*scrollBar:		false
+urxvt*internalBorder:	6
+urxvt*letterSpace:		-1
+urxvt*background:	#000000
+#urxvt*depth: 32
+#urxvt*background: rgba:0000/0000/0000/eeee
+#urxvt*background:	#090909
+urxvt*foreground:	#DDDDDD
+urxvt*inheritPixmap:	true
+#urxvt*fading:			60
+#urxvt*tintColor:		#111111
+urxvt*shading:			5
+
+! 0: black
+*color0:  #2E3436
+*color8:  #555753
+
+! 1: red
+*color1:  #CC0000
+*color9:  #9f6767
+
+! 2: green
+*color2:  #4E9A06
+*color10: #8AE234
+
+! 3: yellow
+*color3:  #C4A000
+*color11: #FCE94F
+
+! 4: blue
+*color4:  #3465A4
+*color12: #729FCF
+
+! 5: magenta
+*color5:  #bb77a4
+*color13: #bb77a4
+
+! 6: cyan
+*color6:  #77bbb5
+*color14: #77bbb5
+
+! 7: white
+*color7:  #D3D7CF
+*color15: #EEEEEC
+
+
+urxvt*perl-ext-common:	default,matcher
+urxvt*urlLauncher:      /usr/bin/firefox
+urxvt*matcher.button:	1
+urxvt*cursorBlink:      true
+urxvt*termName:         xterm-256color
+urxvt*saveLines:		2000
+
+Xcursor.theme:Vanilla-DMZ-AA
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.colorUL: #4682B4
