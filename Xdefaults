@@ -1,4 +1,4 @@
-urxvt*font:				xft:Monospace:style=Regular:antialias=true
+urxvt*font:				xft:Monospace:style=Regular:antialias=true:size=15
 urxvt*boldFont:			xft:Monospace:style=Bold:antialias=true
 urxvt*italicFont:		xft:Monospace:style=Italic:antialias=true
 urxvt*scrollBar:		false
@@ -12,40 +12,45 @@ urxvt*foreground:	#DDDDDD
 urxvt*inheritPixmap:	true
 #urxvt*fading:			60
 #urxvt*tintColor:		#111111
-urxvt*shading:			5
+urxvt*shading:			10
 
-! 0: black
-*color0:  #2E3436
-*color8:  #555753
+! special
+*.foreground:   #a7a7a7
+*.background:   #1e1e1e
+*.cursorColor:  #a7a7a7
 
-! 1: red
-*color1:  #CC0000
-*color9:  #9f6767
+! black
+*.color0:       #1e1e1e
+*.color8:       #5f5a60
 
-! 2: green
-*color2:  #4E9A06
-*color10: #8AE234
+! red
+*.color1:       #cf6a4c
+#*.color9:       #cf6a4c
+*.color9:       #9f6767
 
-! 3: yellow
-*color3:  #C4A000
-*color11: #FCE94F
+! green
+*.color2:       #8f9d6a
+*.color10:      #8f9d6a
 
-! 4: blue
-*color4:  #3465A4
-*color12: #729FCF
+! yellow
+*.color3:       #f9ee98
+*.color11:      #f9ee98
 
-! 5: magenta
-*color5:  #bb77a4
-*color13: #bb77a4
+! blue
+*.color4:       #7587a6
+*.color12:      #7587a6
 
-! 6: cyan
-*color6:  #77bbb5
-*color14: #77bbb5
+! magenta
+*.color5:       #9b859d
+*.color13:      #9b859d
 
-! 7: white
-*color7:  #D3D7CF
-*color15: #EEEEEC
+! cyan
+*.color6:       #afc4db
+*.color14:      #afc4db
 
+! white
+*.color7:       #a7a7a7
+*.color15:      #ffffff
 
 urxvt*perl-ext-common:	default,matcher
 urxvt*urlLauncher:      /usr/bin/firefox
