@@ -1,0 +1,105 @@
+# TODO - THINGS TO MODIFY BELOW
+#
+# 1. Update the hostname "allinone.example.com" to match the hostname of your
+#    machine. Do this in the [masters], [etcd], [nodes], and [nfs] sections below.
+#
+#    I recommend using nip.io so you don't have to setup DNS yourself.
+#    If the IP address of your machine is 192.168.1.10 then you'd use
+#    "192.168.1.10.nip.io" as your hostname
+#
+# 2. Update "ansible_user" if you aren't using the root user
+#
+# 3. Update "openshift_master_default_subdomain" to match your machine's IP address
+#
+#    Same recommendation as #1 to use nip.io here.
+#
+# 4. The identity provider below is set to AllowAll
+#
+#    This means you'll be able to login to the cluster with any username/password
+#    and it'll just work. This is great for demo environments so you don't have
+#    to keep a password file updated.
+#
+#    I left the HTPasswd option commented below though if you want to use it
+#    instead. Just uncomment it and then remove the AllowAll option.
+#
+# You should be able to leave everything else as is. I haven't tested this
+# file, so if you run into issues let me know.
+
+[masters]
+allinone.example.com
+
+[etcd]
+allinone.example.com
+
+[nodes]
+allinone.example.com openshift_schedulable=True openshift_node_labels="{'region': 'infra'}"
+
+[nfs]
+allinone.example.com
+
+# Create an OSEv3 group that contains the masters and nodes groups
+[OSEv3:children]
+masters
+nodes
+etcd
+nfs
+
+[OSEv3:vars]
+openshift_disable_check=memory_availability,disk_availability,package_version
+
+ansible_user=root
+ansible_become=yes
+
+openshift_deployment_type=openshift-enterprise
+openshift_release=v3.9
+
+openshift_master_default_subdomain=apps.192.168.1.10.nip.io
+
+debug_level=2
+
+# htpasswd auth
+#openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+# Defining htpasswd users
+#openshift_master_htpasswd_users={'user1': '<pre-hashed password>', 'user2': '<pre-hashed password>'}
+# or
+#openshift_master_htpasswd_file=<path to local pre-generated htpasswd file>
+
+# Allow all auth
+openshift_master_identity_providers=[{'name': 'allow_all', 'login': 'true', 'challenge': 'true', 'kind': 'AllowAllPasswordIdentityProvider'}]
+
+osm_default_node_selector='region=infra'
+
+# Registry Storage Options
+openshift_hosted_registry_storage_kind=nfs
+openshift_hosted_registry_storage_access_modes=['ReadWriteMany']
+openshift_hosted_registry_storage_nfs_directory=/exports
+openshift_hosted_registry_storage_nfs_options='*(rw,root_squash)'
+openshift_hosted_registry_storage_volume_name=registry
+openshift_hosted_registry_storage_volume_size=10Gi
+
+# Metrics deployment
+openshift_metrics_install_metrics=true
+# Storage Options
+openshift_metrics_storage_kind=nfs
+openshift_metrics_storage_access_modes=['ReadWriteOnce']
+openshift_metrics_storage_nfs_directory=/exports
+openshift_metrics_storage_nfs_options='*(rw,root_squash)'
+openshift_metrics_storage_volume_name=metrics
+openshift_metrics_storage_volume_size=10Gi
+openshift_metrics_storage_labels={'storage': 'metrics'}
+
+# Logging deployment
+openshift_logging_install_logging=true
+# Logging storage config
+openshift_logging_storage_kind=nfs
+openshift_logging_storage_access_modes=['ReadWriteOnce']
+openshift_logging_storage_nfs_directory=/exports
+openshift_logging_storage_nfs_options='*(rw,root_squash)'
+openshift_logging_storage_volume_name=logging
+openshift_logging_storage_volume_size=10Gi
+openshift_logging_storage_labels={'storage': 'logging'}
+
+os_sdn_network_plugin_name='redhat/openshift-ovs-multitenant'
+
+openshift_master_api_port=8443
+openshift_master_console_port=8443
